@@ -1,0 +1,150 @@
+.container {
+    position: fixed;
+    background-image: url(../../../public/images/gondola.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin-top: 70px;
+    displaY: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.container h1 {
+    font-family: Satisfy
+}
+
+.container p {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.formContainer {
+    margin: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    height: 100%;
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formContainer form {
+    padding: 20px;
+    border-radius: 20px;
+    gap: 15px;
+    max-width: 400px;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formContainer form>div {
+    font-family: Handlee;
+    font-weight: 600;
+    color: black;
+    width: 100%;
+    display: grid;
+    grid-column: 2;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.formContainer form input {
+    border-radius: 50px;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    flex-grow: 1;
+    outline: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.formContainer form input:focus {
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1rem;
+    margin: 20px 0;
+}
+
+.check {
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    background: skyblue;
+    color: white;
+}
+
+.note {
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    border: solid red;
+    border-top: 1px;
+    border-bottom: 1px;
+    padding: 10px;
+    font-size: 16px;
+    color: red;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.submit {
+    /* bg-sky-600 px-8 py-4 rounded-2xl border-0 text-white rounded-b-2xl font-sans */
+    background: rgb(5, 108, 226);
+    border-radius: 0 0 20px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.5em;
+    color: white;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    font-family: sans-serif;
+
+}
+
+.alert {
+    display: none;
+    background: rgba(255, 255, 255, 0.2);
+    position: fixed;
+    top: 20%;
+    right: 0;
+    width: 400px;
+    border-style: solid;
+    border-width: 3px 0 3px 0;
+    padding: 20px;
+    font-weight: 900;
+    transition: all 0.1s ease-in-out;
+    animation-name: slide;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide {
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .alert {
+        width: 100%;
+    }
+}

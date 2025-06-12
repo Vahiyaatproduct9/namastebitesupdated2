@@ -1,0 +1,63 @@
+.Intro {
+    z-index: 1;
+    position: relative;
+    height: 100%;
+    background-image: url(/images/veg-hakka-noodles.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.7);
+    border-radius: 0% 100% 37% 63% / 56% 0% 100% 44%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.Intro img {
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 0 12px 0 black;
+    position: relative;
+    border-radius: 100%;
+    top: 100px;
+}
+
+.Heading {
+    width: 100%;
+    margin-top: 100px;
+    text-align: center;
+    font-family: Gochi Hand;
+}
+
+.Heading h1 {
+    font-size: 70px;
+}
+
+@media screen and (max-width: 768px) {
+    .Intro {
+        height: 200px;
+        border-radius: 0 0 7% 7%;
+    }
+
+    .Intro img {
+        width: 100px;
+        height: 100px;
+        box-shadow: none;
+    }
+
+    .Heading h1 {
+        font-size: 30px;
+    }
+}
+
+.Heading p {
+    font-size: 30px;
+}

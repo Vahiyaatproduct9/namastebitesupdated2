@@ -1,0 +1,159 @@
+.wherecanyoufindus-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 40px;
+}
+
+.wherecanyoufindus-header {
+    text-align: left;
+    font-size: 40px;
+    font-family: Handlee;
+    margin-right: auto;
+    padding-left: 80px;
+}
+
+.map-embed {
+    flex-grow: 2;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+}
+
+.map-embed iframe {
+    margin: 20px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+}
+
+.where-can-you-find-us {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 0;
+
+}
+
+@media screen and (max-width: 768px) {
+    .where-can-you-find-us {
+        padding: auto;
+    }
+}
+
+.get-directions {
+    text-decoration: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.7);
+    flex-grow: 1;
+    margin: 0;
+    padding: 40px;
+}
+
+
+.location {
+    flex-grow: 1;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.7);
+    margin: 40px 0;
+    text-align: right;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.getdirections-button {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 30px;
+    padding: 20px 40px;
+    border-radius: 20px;
+    background: #1e40af;
+    border: 5px solid #1e40af;
+    color: white;
+    margin-top: 100px;
+    width: fit-content;
+    transition: all 0.2s ease-in-out;
+}
+
+
+@media screen and (max-width: 768px) {
+    .getdirections-button {
+        flex-grow: 1;
+        margin-top: 0;
+    }
+
+    .get-directions {
+        height: fit-content;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .wherecanyoufindus-header {
+        padding-left: 20px;
+        font-size: 30px;
+    }
+
+}
+
+.getdirections-button:hover,
+.getdirections-button.active,
+.getdirections-button:visited {
+    text-decoration: none;
+}
+
+.getdirections-button:hover {
+    background: #1e3a8a;
+    border: 5px solid #1e3a8a;
+    cursor: pointer;
+}
+
+.getdirections-button img {
+    height: 40px;
+    filter: invert(1);
+}
+
+.location-heading img {
+    filter: invert(1);
+    height: 40px;
+}
+
+.address {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.address>div {
+    flex-grow: 1
+}
+
+.location-heading {
+    color: white;
+    display: flex;
+
+}
+
+.location-heading>div {
+    display: flex;
+    margin-left: auto
+}
+
+.location-text {
+    color: white;
+    font-size: 20px;
+    font-family: Inter;
+}

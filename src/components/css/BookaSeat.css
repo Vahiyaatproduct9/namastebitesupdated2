@@ -1,0 +1,96 @@
+.bookaseat {
+    background-image: url(../../../public/images/background-3.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 80px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 60px;
+}
+
+
+.video-blur {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(50px);
+}
+
+.bookaseat-text {
+    padding: 100px 120px;
+    font-size: 50px;
+    font-family: Handlee;
+    font-weight: 600;
+    color: white;
+    text-align: right;
+}
+
+
+
+
+.bookaseat video {
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-position: center;
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+}
+
+.bookaseat-button-div {
+    width: 100%;
+    padding: 30px 0 120px 120px;
+}
+
+
+.bookaseat-button-div button {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px 70px;
+    font-family: Inter;
+    font-size: 30px;
+    border-radius: 50px;
+    background: #1e40af;
+    border: 5px solid #1e40af;
+    color: #ffffff;
+    transition: all 0.1s ease-in-out;
+}
+
+.bookaseat-button-div button:hover {
+    background: #325add;
+    border-color: #325add;
+}
+
+@media screen and (max-width: 768px) {
+    .bookaseat {
+        margin: 20px;
+    }
+
+    .bookaseat-text {
+        padding: 50px 20px;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .bookaseat-button-div {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .bookaseat-button-div button {
+        width: 100%;
+        padding: 15px 50px;
+        font-size: 20px;
+    }
+}

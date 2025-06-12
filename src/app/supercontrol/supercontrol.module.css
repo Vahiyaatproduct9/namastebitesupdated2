@@ -1,0 +1,201 @@
+.body {
+    padding: 70px;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: url(../../../public/images/peace.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: Ancizar Sans;
+}
+
+.headers {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), -5px -5px 10px rgba(255, 255, 255, 0.3), inset -3px -3px 10px rgba(255, 255, 255, 0.2), inset 3px 3px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 50px;
+    font-family: Ancizar Sans;
+    font-size: 1.4rem;
+}
+
+.headers button {
+    padding: 10px;
+    transition: all 0.1s;
+    border-radius: 20px;
+    text-underline-offset: 8px;
+
+}
+
+.headers button:active {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.showOrdersContainer {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), -5px -5px 10px rgba(255, 255, 255, 0.3), inset -3px -3px 10px rgba(255, 255, 255, 0.2), inset 3px 3px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: grid;
+    align-items: stretch;
+    padding: 10px;
+    grid-template-columns: auto auto auto;
+}
+
+.OrderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+}
+
+.OrderContainer table {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.OrderContainer table tr {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.OrderContainer table tr td {
+    border-width: 2px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orderactiondiv {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.orderactiondiv button {
+    flex-grow: 1;
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+.deliveredbutton {
+    color: black;
+    background: rgb(66, 212, 66);
+}
+
+.deliveredbutton:active {
+    box-shadow: 0 0 10px 2px rgba(0, 255, 0, 1);
+}
+
+.deletebutton {
+    color: white;
+    background: rgb(250, 40, 40);
+}
+
+.deletebutton:active {
+
+    box-shadow: 0 0 10px 2px rgba(255, 0, 0, 1);
+}
+
+
+.loadingContainer {
+    top: 0;
+    left: 0;
+    z-index: 5;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(225, 225, 225, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.loading {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.loading h1 {
+    font-size: 2rem;
+    font-family: Ancizar Sans;
+    text-align: center;
+}
+
+.loading h1::after {
+    content: "";
+    animation-name: load;
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes load {
+    0% {
+        content: "";
+    }
+
+    25% {
+        content: ".";
+    }
+
+    50% {
+        content: "..";
+    }
+
+    75% {
+        content: "...";
+    }
+
+    100% {
+        content: "";
+    }
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .body {
+        padding: 70px 0;
+    }
+
+    .headers {
+        border-radius: 0;
+    }
+
+    .showOrdersContainer {
+        border-radius: 0;
+    }
+}

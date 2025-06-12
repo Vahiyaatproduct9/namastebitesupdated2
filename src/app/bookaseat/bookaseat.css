@@ -1,0 +1,61 @@
+.background {
+    top: 0;
+    left: 0;
+    background-image: url(../../../public/images/the-lonely-ocean.jpg);
+    background-size: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: orange;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+h1 {
+    font-family: Satisfy;
+    color: #222;
+
+
+}
+
+p {
+    font-size: 1.5rem;
+    color: #222;
+    font-family: Gochi Hand;
+}
+
+.container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    padding: 20px;
+    min-width: 30rem;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+}
+
+.inputdata {
+    box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 2px solid #333;
+    padding: 15px 20px;
+    font-family: Handlee;
+    font-weight: 600;
+
+}
+
+button {
+    border-radius: 10px;
+    transition: all 0.1s;
+    padding: 0 30px;
+}
+
+button:hover {
+    filter: brightness(1.2);
+}
