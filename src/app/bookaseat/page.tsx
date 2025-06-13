@@ -10,10 +10,11 @@ function Seat() {
     const formData = new FormData(event.currentTarget)
     const name = formData.get('name')
     const phone = formData.get('phone')
+    const email = formData.get('email')
     const date = formData.get('date')
     const time = formData.get('time')
 
-    const data = { name, phone, date, time };
+    const data = { name, phone, email, date, time };
 
     const res = await fetch('/api/bookaseat', {
       method: 'POST',
@@ -46,6 +47,8 @@ function Seat() {
           <div className='flex'>
             <div className='p-2 px-3 flex items-center justify-center align-middle border-2 border-gray-800 translate-x-2 rounded-l-2xl font-bold bg-gray-400'>+91</div>
             <input name='phone' className='inputdata grow' type='phone' required /></div>
+          <label>Email</label>
+          <input name='email' className='inputdata' type='email' required />
           <label>Date</label>
           <input name='date' className='inputdata' type='date' required />
           <label>Time</label>

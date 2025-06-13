@@ -54,9 +54,9 @@ export default function SuperControl() {
         }
     }, [cred])
 
-    async function handleDelete(id: string) {
+    async function handleDeleteOrders(id: string) {
         try {
-            const res = await fetch('/api/supercontrol/delete', {
+            const res = await fetch('/api/supercontrol/delete/order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: cred.username, password: cred.password, id }),
@@ -76,6 +76,30 @@ export default function SuperControl() {
         }
         catch (err) {
             console.error('Failed to delete order', err)
+        }
+    }
+    async function handleDeleteTable(id: string) {
+        try {
+            const res = await fetch('/api/supercontrol/delete/table', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: cred.username, password: cred.password, id }),
+            })
+            const { result } = await res.json()
+            setDeleteStatus(result)
+            if (deleteStatus === 'success') {
+                alert("Table Deleted Succesfully")
+            }
+            else if (deleteStatus === 'error') {
+                alert("Table Not Found")
+            }
+            else {
+                alert("Error: " + deleteStatus)
+            }
+
+        }
+        catch (err) {
+            console.error('Failed to delete Table', err)
         }
     }
     // 🔄 Fetch city from coords
@@ -101,10 +125,32 @@ export default function SuperControl() {
         }) {
         const [parsed, setParsed] = useState<React.ReactElement[]>([])
 
+        function haversine(lat1: number, lon1: number, lat2: number, lon2: number) {
+            const R = 6371; // Earth radius in kilometers
+
+            const toRad = (degrees: number) => degrees * Math.PI / 180;
+
+            const lat1Rad = toRad(lat1);
+            const lon1Rad = toRad(lon1);
+            const lat2Rad = toRad(lat2);
+            const lon2Rad = toRad(lon2);
+
+            const dLat = lat2Rad - lat1Rad;
+            const dLon = lon2Rad - lon1Rad;
+
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1Rad) * Math.cos(lat2Rad) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            const distance = R * c;
+
+            return distance;
+        }
         useEffect(() => {
             async function build() {
                 const results = await Promise.all(
-                    orders.map(async (item, i) => {
+                    orders.map(async (item) => {
                         const loc = await getLocation(+item.computedlocation[0], +item.computedlocation[1])
 
                         return (
@@ -113,12 +159,17 @@ export default function SuperControl() {
                                     <h1>Name: {item.name}</h1>
                                     <h2>Phone: {item.phone}</h2>
                                     <p>
-                                        Input Location:<br />
-                                        {item.location}<br />
-                                        Actual Location:<br />
-                                        {loc.locality || 'Unknown'}<br />
-                                        Accuracy:<br />
-                                        {(Math.log((item.computedlocation[2]) + 1))}
+                                        Input Location:
+                                        {' ' + item.location}<br />
+                                        Actual Location:
+                                        {' ' + loc.locality || 'Unknown'}<br />
+                                        Accuracy:
+                                        {' ' + Math.round(100 / (1 + (item.computedlocation[2] / 1000)))}%<br />
+                                        Distance:
+                                        {
+                                            (haversine(26.3822951, 88.3135689, item.computedlocation[0], item.computedlocation[1]) - (item.computedlocation[2] / 1000)).toFixed(2)
+                                            + ' ~ ' +
+                                            (haversine(26.3822951, 88.3135689, item.computedlocation[0], item.computedlocation[1]) + (item.computedlocation[2] / 1000)).toFixed(2)} km<br />
                                     </p>
                                     <a
                                         href={`https://www.google.com/maps?q=${item.computedlocation[0]},${item.computedlocation[1]}`}
@@ -137,8 +188,8 @@ export default function SuperControl() {
                                     </table>
                                 </div>
                                 <div className={css.orderactiondiv}>
-                                    <button onClick={() => { handleDelete(item._id.toString()) }} className={css.deliveredbutton}>Delivered</button>
-                                    <button onClick={() => { handleDelete(item._id.toString()) }} className={css.deletebutton}>Delete</button>
+                                    <button onClick={() => { handleDeleteOrders(item._id.toString()) }} className={css.deliveredbutton}>Delivered</button>
+                                    <button onClick={() => { handleDeleteOrders(item._id.toString()) }} className={css.deletebutton}>Delete</button>
                                 </div>
                             </div>
                         )
@@ -153,16 +204,40 @@ export default function SuperControl() {
 
         return <div className={css.showOrdersContainer}>{parsed}</div>
     }
+    async function sendConfirmEmail(name: string, phone: string, email: string, date: string, time: string, isConfirmed: boolean) {
+        const res = await fetch('/api/supercontrol/sendconfirmemail', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, phone, email, date, time, isConfirmed }),
+        })
+        const { confirmStatus } = await res.json()
+        if (confirmStatus === 'confirmation_sent') {
+            alert('Confirmation email sent successfully!')
+        } else if (confirmStatus === 'rejection_sent') {
+            alert('Rejection email sent successfully!')
+        }
+        else {
+            alert('Failed to send email.' + confirmStatus)
+        }
+    }
 
-    // 🧾 Table booking display
+
     function TableBookings() {
         return (
             <div className={css.showOrdersContainer}>
-                {data?.tablebookings?.map((booking: any, idx: number) => (
+                {data?.tablebookings?.map((booking: {
+                    name: string,
+                    phone: string,
+                    email: string,
+                    date: string,
+                    time: string,
+                    _id: ObjectId
+                }, idx: number) => (
                     <div key={idx} className={css.OrderContainer}>
                         <div className={css.orderinfo}>
-                            <h1>Name: {booking.name}</h1>
+                            <h1>{booking.name}</h1>
                             <h2>Phone: {booking.phone}</h2>
+                            <p>Email: {booking.email}</p>
                             <div className="w-full flex items-center justify-evenly">
                                 <label>
                                     Date: <b>{booking.date}</b>
@@ -173,14 +248,21 @@ export default function SuperControl() {
                             </div>
                         </div>
                         <div className={css.orderactiondiv}>
-                            <button className={css.deliveredbutton}>Confirm</button>
-                            <button className={css.deletebutton}>Reject</button>
+                            <button onClick={() => {
+                                sendConfirmEmail(booking.name, booking.phone, booking.email, booking.date, booking.time, true);
+                                handleDeleteTable(booking._id.toString());
+                            }} className={css.deliveredbutton}>Confirm</button>
+                            <button onClick={() => {
+                                sendConfirmEmail(booking.name, booking.phone, booking.email, booking.date, booking.time, false);
+                                handleDeleteTable(booking._id.toString());
+                            }} className={css.deletebutton}>Reject</button>
                         </div>
                     </div>
                 ))}
             </div>
         )
     }
+
     // 👀 What to render?
     if (loading) {
         return (

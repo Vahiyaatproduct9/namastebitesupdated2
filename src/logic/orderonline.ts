@@ -1,6 +1,5 @@
 import { MongoClient } from "mongodb";
 import 'dotenv/config'
-import { error } from "console"
 const uri: string | any = process.env.MONGOODB_ORDERS;
 if (!uri) {
     throw new Error("MONGODB_DB environment variable is not set.");

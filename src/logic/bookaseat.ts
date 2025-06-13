@@ -10,6 +10,7 @@ if (!uri) {
 export async function insertData(
     name: string,
     phone: string,
+    email: string,
     date: Date,
     time: string
 ): Promise<string> {
@@ -27,6 +28,7 @@ export async function insertData(
             const data = {
                 name: name.trim(),
                 phone: phone.trim(),
+                email: email.trim(),
                 date: date,
                 time: time
             }
@@ -37,7 +39,7 @@ export async function insertData(
             else {
                 status = "failure"
             }
-        } catch (e) {
+        } catch (error) {
             console.error(error)
             status = "insertion_failure"
         } finally {
